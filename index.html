@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angel Rico — Diseñador gráfico</title>
+  <meta name="description" content="Portafolio de Angel Rico, diseñador gráfico y desarrollador web en Guadalajara. Contenido para redes sociales, carruseles, identidad visual y sitios web.">
+  <meta name="theme-color" content="#050507">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="Angel Rico — Diseñador gráfico">
+  <meta property="og:description" content="Contenido para redes sociales, carruseles, identidad visual y sitios web para marcas que quieren verse profesionales.">
+  <meta property="og:image" content="https://angelrico247.github.io/portafolio-diseno/assets/img/og-image.jpg">
+  <meta property="og:url" content="https://angelrico247.github.io/portafolio-diseno/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/img/angel-hero.webp" media="(max-width: 991px)">
+  <link rel="preload" as="image" href="assets/img/angel-hero-wide.webp" media="(min-width: 992px)">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#sobre-mi">Saltar al contenido</a>
+
+  <!-- 1. Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="header__brand" href="#inicio" aria-label="Angel Rico, ir al inicio">ANGEL RICO</a>
+      <button class="header__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav" aria-label="Principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#sobre-mi">Sobre mí</a></li>
+          <li><a class="nav__link" href="#trabajos">Trabajos</a></li>
+          <li><a class="nav__link" href="#servicios">Servicios</a></li>
+          <li><a class="nav__link" href="#ubicacion">Ubicación</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero -->
+    <section class="hero" id="inicio" aria-label="Inicio">
+      <div class="hero__bg" role="img" aria-label="Retrato de Angel Rico en un cuarto oscuro con luces violetas y azules"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <h1 class="hero__name">Angel Rico</h1>
+        <p class="hero__tagline">Diseñador gráfico · Contenido para redes y branding</p>
+      </div>
+      <a class="hero__scroll" href="#sobre-mi" aria-label="Bajar a Sobre mí">
+        <span class="hero__scroll-text">scroll</span>
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- 3. Sobre mí -->
+    <section class="section about" id="sobre-mi" aria-labelledby="about-title">
+      <div class="container about__grid">
+        <div class="about__photo reveal">
+          <img src="assets/img/angel-hero.webp" alt="Angel Rico, diseñador gráfico, sentado en su estudio" width="1145" height="1374" loading="lazy" decoding="async">
+        </div>
+        <div class="about__text">
+          <h2 class="sec-title reveal" id="about-title">SOBRE <span>MÍ</span></h2>
+          <p class="reveal" style="--d:.08s">Hola, soy Angel Rico, diseñador gráfico y desarrollador web en Guadalajara. Diseño contenido para redes sociales, carruseles, identidad visual y sitios web para marcas que quieren verse profesionales y comunicar con claridad. Me gusta cuidar cada detalle del proceso: desde la idea y la retícula hasta la pieza final lista para publicar.</p>
+          <ul class="bullets reveal" style="--d:.16s">
+            <li>Diseño para redes sociales</li>
+            <li>Carruseles y stories</li>
+            <li>Identidad visual</li>
+            <li>Diseño web y UI</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Trabajos -->
+    <section class="section section--alt" id="trabajos" aria-labelledby="work-title">
+      <div class="container">
+        <h2 class="sec-title sec-title--center reveal" id="work-title">TRABAJOS <span>SELECCIONADOS</span></h2>
+
+        <div class="work-tabs reveal" role="tablist" aria-label="Tipo de trabajo">
+          <button class="work-tab" type="button" role="tab" id="wt-redes" aria-controls="wp-redes" aria-selected="true">Redes sociales <span class="work-tab__count"></span></button>
+          <button class="work-tab" type="button" role="tab" id="wt-web" aria-controls="wp-web" aria-selected="false" tabindex="-1">Sitios web <span class="work-tab__count"></span></button>
+        </div>
+
+        <div class="work-panel" role="tabpanel" id="wp-redes" aria-labelledby="wt-redes">
+          <div class="filters" id="filters" role="group" aria-label="Filtrar por marca"></div>
+          <ul class="tiles" id="tiles"></ul>
+        </div>
+
+        <div class="work-panel" role="tabpanel" id="wp-web" aria-labelledby="wt-web" hidden>
+          <ul class="projects" id="projects"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Habilidades -->
+    <section class="section skills" aria-labelledby="skills-title">
+      <div class="container skills__grid">
+        <div>
+          <h2 class="skills__title reveal" id="skills-title">Diseño que comunica y convierte</h2>
+          <p class="reveal" style="--d:.08s">Combino diseño gráfico y desarrollo web para que cada marca se vea igual de bien en su feed, en sus carruseles y en su sitio.</p>
+        </div>
+        <div class="bars" id="bars"></div>
+      </div>
+    </section>
+
+    <!-- 6. Banda freelance -->
+    <section class="freelance" aria-label="Disponibilidad freelance">
+      <svg class="freelance__pattern" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="shapes" width="120" height="120" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1.5">
+              <circle cx="22" cy="24" r="10"/>
+              <path d="M78 36 L90 14 L102 36 Z"/>
+              <rect x="14" y="74" width="20" height="20"/>
+              <circle cx="84" cy="88" r="6"/>
+              <path d="M52 66 L62 84 L42 84 Z"/>
+              <rect x="96" y="58" width="12" height="12" transform="rotate(20 102 64)"/>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#shapes)"/>
+      </svg>
+      <div class="container freelance__inner">
+        <p class="freelance__text">Disponible para proyectos freelance</p>
+        <a class="freelance__link" href="#trabajos">Ver trabajos</a>
+      </div>
+    </section>
+
+    <!-- 7. Servicios -->
+    <section class="section section--alt" id="servicios" aria-labelledby="services-title">
+      <div class="container">
+        <h2 class="sec-title sec-title--center reveal" id="services-title">MIS <span>SERVICIOS</span></h2>
+        <div class="services">
+          <article class="service reveal">
+            <a class="service__link" href="#trabajos">
+              <div class="service__img"><img data-service="dental-post" alt="Publicación de redes sociales para Dental Clinic" width="640" height="400" loading="lazy" decoding="async"></div>
+              <h3 class="service__title">Contenido para redes sociales</h3>
+              <p class="service__meta">Publicaciones · Stories · Reels</p>
+            </a>
+          </article>
+          <article class="service reveal" style="--d:.1s">
+            <a class="service__link" href="#trabajos">
+              <div class="service__img"><img data-service="terra-carousel" alt="Primera lámina de un carrusel para Terra Inmobiliaria" width="640" height="400" loading="lazy" decoding="async"></div>
+              <h3 class="service__title">Carruseles que explican</h3>
+              <p class="service__meta">Educativos · Catálogo · Procesos</p>
+            </a>
+          </article>
+          <article class="service reveal" style="--d:.2s">
+            <a class="service__link" href="#trabajos">
+              <div class="service__img"><img src="assets/img/projects/realstate.webp" alt="Mockup de un sitio web inmobiliario en una laptop" width="640" height="400" loading="lazy" decoding="async"></div>
+              <h3 class="service__title">Sitios web a la medida</h3>
+              <p class="service__meta">Landing pages · Sitios · UI</p>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Ubicación (sin datos de contacto a propósito) -->
+    <section class="section contact" id="ubicacion" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 class="sec-title sec-title--center reveal" id="contact-title">MI <span>UBICACIÓN</span></h2>
+        <ul class="info info--center reveal" id="contact-info"></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. Footer -->
+  <footer class="footer">
+    <svg class="footer__wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0H1440V20C1320 44 1200 46 1080 28C960 10 840 8 720 26C600 44 480 46 360 28C240 10 120 8 0 28Z" fill="#ffffff"/>
+    </svg>
+    <div class="container footer__inner">
+      <a class="footer__brand" href="#inicio">ANGEL RICO</a>
+      <p class="footer__copy">© 2026 Angel Rico</p>
+    </div>
+  </footer>
+
+  <!-- 10. Extras -->
+  <button class="to-top" id="to-top" type="button" aria-label="Subir al inicio">
+    <span class="to-top__text">Subir</span>
+    <span class="to-top__line" aria-hidden="true"></span>
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js" defer></script>
+  <script src="assets/js/brands-data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
