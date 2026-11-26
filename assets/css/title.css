@@ -43,3 +43,9 @@
 
 /* Brillo suave del trazo para que se lea sobre la foto oscura */
 .title__stroke { filter: drop-shadow(0 0 6px rgba(170, 130, 255, .55)); }
+
+/* Al terminar la intro el borde pasa a blanco (igual que el relleno);
+   el degradado solo se ve dentro del aura del cursor */
+.title__stroke-white { opacity: 0; transition: opacity .6s ease; }
+.title__stroke-white text { fill: none; stroke: #fff; stroke-width: 2.8; stroke-linejoin: round; }
+.title--drawn .title__stroke-white { opacity: 1; }

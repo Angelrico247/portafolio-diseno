@@ -58,10 +58,15 @@
     var mask = el('mask', { id: 'title-mask', maskUnits: 'userSpaceOnUse', x: vx - 20, y: vy - 20, width: vw + 40, height: vh + 40 }, defs);
     el('rect', { x: vx - 20, y: vy - 20, width: vw + 40, height: vh + 40, fill: '#fff' }, mask);
     var hole = el('circle', { cx: 0, cy: 0, r: 0, fill: '#000' }, mask);
+    // Máscara inversa: solo el círculo se ve (ahí el borde sale con degradado)
+    var maskIn = el('mask', { id: 'title-mask-in', maskUnits: 'userSpaceOnUse', x: vx - 20, y: vy - 20, width: vw + 40, height: vh + 40 }, defs);
+    el('rect', { x: vx - 20, y: vy - 20, width: vw + 40, height: vh + 40, fill: '#000' }, maskIn);
+    var holeIn = el('circle', { cx: 0, cy: 0, r: 0, fill: '#fff' }, maskIn);
 
     // Capas: relleno (con máscara) y trazo (encima)
     var fillG = el('g', { 'class': 'title__fill', mask: 'url(#title-mask)' }, svg);
     var strokeG = el('g', { 'class': 'title__stroke' }, svg);
+    var whiteG = el('g', { 'class': 'title__stroke-white', mask: 'url(#title-mask)' }, svg);
     var n = 0;
     for (var j = 0; j < TEXT.length; j++) {
       if (TEXT[j] === ' ') continue;
@@ -70,6 +75,7 @@
       var t = el('text', a, strokeG);
       t.style.setProperty('--i', n++);
       t.textContent = TEXT[j];
+      el('text', a, whiteG).textContent = TEXT[j];
     }
 
     // Aura detrás de las letras
@@ -78,12 +84,12 @@
     aura.setAttribute('aria-hidden', 'true');
     h1.insertBefore(aura, svg);
 
-    return { svg: svg, hole: hole, aura: aura };
+    return { svg: svg, hole: hole, holeIn: holeIn, strokeG: strokeG, aura: aura };
   }
 
   // Aura + contorno con el cursor (solo punteros finos con hover)
   function initHover(p) {
-    var svg = p.svg, hole = p.hole, aura = p.aura;
+    var svg = p.svg, hole = p.hole, holeIn = p.holeIn, aura = p.aura;
     var r = 0, target = 0, cx = 0, cy = 0, raf = 0, first = true;
     var cur = { x: 0, y: 0 };      // centro suavizado en px de cliente
 
@@ -101,6 +107,9 @@
       hole.setAttribute('cx', pt.x);
       hole.setAttribute('cy', pt.y);
       hole.setAttribute('r', r / ctm.a);   // px de pantalla -> unidades del SVG
+      holeIn.setAttribute('cx', pt.x);
+      holeIn.setAttribute('cy', pt.y);
+      holeIn.setAttribute('r', r / ctm.a);
 
       var box = h1.getBoundingClientRect();
       var k = r / RADIUS;
@@ -133,6 +142,7 @@
       svg.classList.add('title--drawn');
       h1.classList.add('title--drawn');
       finish();
+      setTimeout(function () { parts.strokeG.setAttribute('mask', 'url(#title-mask-in)'); }, reduce ? 0 : 650);
       if (hoverOK) initHover(parts);
     }
     if (reduce) { done(); return; }

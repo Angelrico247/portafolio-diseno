@@ -176,7 +176,7 @@ button { font: inherit; color: inherit; }
   animation: glitch-b 4.2s steps(1, end) infinite 1.25s;
 }
 .hero__glitch span:nth-child(3) {
-  filter: saturate(2.2) hue-rotate(95deg) brightness(1.2);
+  filter: saturate(1.8) hue-rotate(160deg) brightness(1.15);
   animation: glitch-c 4.2s steps(1, end) infinite 1.3s;
 }
 .has-ripples .hero__glitch { display: none; }
