@@ -125,20 +125,10 @@
      ------------------------------------------------------------------ */
 
   const header = $('#header');
-  const navToggle = $('#nav-toggle');
-  const nav = $('#nav');
   const navLinks = $$('.nav__link');
   const spyIds = navLinks.map(function (a) { return a.getAttribute('href').slice(1); });
 
-  function setMenu(open) {
-    navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-    nav.classList.toggle('is-open', open);
-    header.classList.toggle('is-open', open);
-  }
-  navToggle.addEventListener('click', function () { setMenu(navToggle.getAttribute('aria-expanded') !== 'true'); });
-  navLinks.forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
-  window.addEventListener('resize', function () { if (window.innerWidth >= 992) setMenu(false); });
+  // El menú móvil (botón hamburguesa) lo controla assets/js/wheel-menu.js.
 
   const toTop = $('#to-top');
   toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
@@ -514,7 +504,7 @@
   document.addEventListener('keydown', function (e) {
     if (Lightbox.isOpen()) { Lightbox.key(e); return; }
     if (Modal.isOpen()) { Modal.key(e); return; }
-    if (e.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') { setMenu(false); navToggle.focus(); }
+    // Escape del menú móvil: lo maneja wheel-menu.js.
   });
 
   /* ------------------------------------------------------------------

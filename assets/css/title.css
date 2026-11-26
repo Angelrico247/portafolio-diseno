@@ -1,0 +1,45 @@
+/* Título del hero: dibujo de trazo + aura/contorno al pasar el cursor */
+
+/* El h1 recibe el ratón (el resto de .hero__content sigue sin interacción) */
+.hero__name { pointer-events: auto; position: relative; display: inline-block; max-width: 100%; }
+
+/* Mientras el JS prepara el SVG, el texto original no se ve (evita parpadeo) y el subtítulo espera */
+.hero.title-drawing .hero__name { color: transparent; }
+.hero.title-drawing .hero__tagline { opacity: 0; transform: translateY(12px); }
+.hero.title-drawn .hero__tagline { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+
+/* SVG: 100 unidades = 1em, así el texto escala con el font-size del h1 (el ancho/alto se fijan desde JS) */
+.hero__name svg { display: block; overflow: visible; position: relative; z-index: 1; max-width: 100%; }
+.hero__name text { font-family: var(--font-head), Poppins, sans-serif; font-weight: 700; font-size: 100px; }
+
+/* Trazo con degradado (se dibuja letra a letra) */
+.title__stroke text {
+  fill: none; stroke: url(#title-grad); stroke-width: 2.8; stroke-linejoin: round;
+  stroke-dasharray: 700; stroke-dashoffset: 700;
+  animation: title-draw 2.2s cubic-bezier(.4, 0, .3, 1) both;
+  animation-delay: calc(var(--i) * .1s);
+}
+.title__fill { fill: #fff; opacity: 0; animation: title-fill .7s ease 2.9s both; }
+.title__fill text { fill: #fff; }
+
+/* Intro terminada: contorno completo y relleno visible, sin animaciones */
+.title--drawn .title__stroke text { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
+.title--drawn .title__fill { animation: none; opacity: 1; }
+
+@keyframes title-draw { to { stroke-dashoffset: 0; } }
+@keyframes title-fill { to { opacity: 1; } }
+
+/* Aura: resplandor que sigue al cursor, detrás de las letras */
+.title__aura {
+  position: absolute; left: 0; top: 0; width: 260px; height: 260px; margin: -130px 0 0 -130px;
+  border-radius: 50%; pointer-events: none; z-index: 0; opacity: 0; filter: blur(14px);
+  background: radial-gradient(circle, rgba(109, 93, 252, .35) 0%, rgba(109, 93, 252, 0) 70%);
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.title-drawn .hero__tagline { transition: none; }
+}
+
+/* Brillo suave del trazo para que se lea sobre la foto oscura */
+.title__stroke { filter: drop-shadow(0 0 6px rgba(170, 130, 255, .55)); }
