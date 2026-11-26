@@ -175,6 +175,7 @@
       if (!$j || !$j.fn || !$j.fn.ripples) return;
       const $bg = $j('.hero__bg');
       $bg.ripples({ resolution: 512, dropRadius: 20, perturbance: 0.04 });
+      document.documentElement.classList.add('has-ripples');
       const hero = $('.hero');
       setInterval(function () {
         if (document.hidden || window.scrollY > hero.offsetHeight) return;
@@ -557,11 +558,9 @@
      ------------------------------------------------------------------ */
 
   (function initServices() {
-    const dental = BRANDS.find(function (b) { return b.name === 'Dental Clinic'; });
     const terra = BRANDS.find(function (b) { return b.name === 'Terra Inmobiliaria'; });
     const srcs = {
-      'dental-post': terra && terra.mockups[0],
-      'terra-carousel': (window.CREATIVE_BRANDS || []).find(b => b.name === 'Tertulia GDL')?.mockups.find(m => m.src.includes('carrusel'))
+      'dental-post': terra && terra.mockups[0]
     };
     $$('img[data-service]').forEach(function (el) {
       const it = srcs[el.dataset.service];
