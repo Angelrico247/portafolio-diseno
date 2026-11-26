@@ -271,7 +271,7 @@
     });
 
     // Se muestran pocas piezas a la vez para que la sección no crezca de más.
-    const PAGE = 8;
+    const PAGE = 10;
     const more = h('button', { class: 'btn btn--ghost tiles__more', type: 'button', text: 'Ver más' });
     grid.after(more);
     let current = [];
@@ -280,7 +280,8 @@
     function forFilter(name) {
       if (name === 'Todos') {
         const out = [];
-        for (let i = 0; i < 2; i++) {
+        const max = Math.max.apply(null, allByBrand.map(function (b) { return b.images.length; }));
+        for (let i = 0; i < max; i++) {
           allByBrand.forEach(function (b) { if (b.images[i]) out.push({ brand: b.name, image: b.images[i] }); });
         }
         return out;
@@ -294,7 +295,20 @@
         img(t.image.src, t.image.alt, { width: 640, height: 800 }),
         h('span', { class: 'tile__over', 'aria-hidden': 'true' }, t.brand, h('small', null, icon('eye'), 'Ver'))
       );
-      return h('li', null, btn);
+      const li = h('li', null, btn);
+      // Bento en grupos de 5: grande a la izquierda + 4 chicas, luego 4 chicas + grande a la derecha.
+      // La posición exacta va en variables que solo usa el CSS de escritorio (en móvil fluye solo).
+      const g = Math.floor(i / 5), pos = i % 5, row = g * 2 + 1;
+      let col, rowStart, span = 1;
+      if (g % 2 === 0) {
+        if (pos === 0) { col = 1; rowStart = row; span = 2; }
+        else { col = 3 + ((pos - 1) % 2); rowStart = row + Math.floor((pos - 1) / 2); }
+      } else if (pos === 4) { col = 3; rowStart = row; span = 2; }
+      else { col = 1 + (pos % 2); rowStart = row + Math.floor(pos / 2); }
+      li.style.setProperty('--gc', col + ' / span ' + span);
+      li.style.setProperty('--gr', rowStart + ' / span ' + span);
+      if (span === 2) li.classList.add('is-big');
+      return li;
     }
 
     function showMore() {
@@ -354,6 +368,37 @@
       });
     });
     select(0);
+  })();
+
+  /* Trabajos: animación de scroll del contenedor (inclinación 3D -> plano) */
+  (function initContainerScroll() {
+    const root = $('.cscroll');
+    if (!root) return;
+    const card = $('.cscroll__card', root);
+    const head = $('.cscroll__head', root);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let ticking = false;
+    function lerp(a, b, p) { return a + (b - a) * p; }
+    function update() {
+      ticking = false;
+      const vh = window.innerHeight;
+      let p = 1;
+      if (!reduce.matches) {
+        // Se mide desde el contenedor (sin transform); la tarjeta rotada da medidas deformadas.
+        const top = root.getBoundingClientRect().top + card.offsetTop;
+        p = Math.min(1, Math.max(0, (vh - top) / (vh * 0.8)));
+      }
+      const s0 = window.innerWidth < 768 ? 0.9 : 1.05;
+      root.style.setProperty('--rx', lerp(20, 0, p).toFixed(2) + 'deg');
+      root.style.setProperty('--sc', lerp(s0, 1, p).toFixed(4));
+      root.style.setProperty('--ty', lerp(0, -40, p).toFixed(1) + 'px');
+      // Mientras está inclinada, la tarjeta mide una pantalla (una tarjeta muy alta rotada en 3D se deforma); al quedar recta se libera.
+      root.style.setProperty('--mh', p < 1 ? '78vh' : 'none');
+    }
+    function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', req, { passive: true });
+    window.addEventListener('resize', req);
+    update();
   })();
 
   /* ------------------------------------------------------------------

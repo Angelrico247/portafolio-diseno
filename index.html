@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/title.css">
   <link rel="stylesheet" href="assets/css/wheel-menu.css">
+  <link rel="stylesheet" href="assets/css/scroll-stack.css">
+  <link rel="stylesheet" href="assets/css/works.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -46,6 +48,8 @@
   </header>
 
   <main>
+    <!-- Hero + Sobre mí: el hero se queda fijo y se encoge mientras Sobre mí sube encima (scroll-stack.js) -->
+    <div class="stack" id="stack">
     <!-- 2. Hero -->
     <section class="hero" id="inicio" aria-label="Inicio">
       <div class="hero__bg" role="img" aria-label="Retrato de Angel Rico en un cuarto oscuro con luces violetas y azules"></div>
@@ -80,23 +84,33 @@
       </div>
     </section>
 
+    </div>
+
     <!-- 4. Trabajos -->
     <section class="section section--alt" id="trabajos" aria-labelledby="work-title">
       <div class="container">
-        <h2 class="sec-title sec-title--center reveal" id="work-title">TRABAJOS <span>SELECCIONADOS</span></h2>
+        <div class="cscroll">
+          <div class="cscroll__head">
+            <h2 class="sec-title sec-title--center" id="work-title">TRABAJOS <span>SELECCIONADOS</span></h2>
+          </div>
+          <div class="cscroll__card">
+            <div class="cscroll__screen">
+              <div class="work-tabs" role="tablist" aria-label="Tipo de trabajo">
+                <button class="work-tab" type="button" role="tab" id="wt-redes" aria-controls="wp-redes" aria-selected="true">Redes sociales <span class="work-tab__count"></span></button>
+                <button class="work-tab" type="button" role="tab" id="wt-web" aria-controls="wp-web" aria-selected="false" tabindex="-1">Sitios web <span class="work-tab__count"></span></button>
+              </div>
 
-        <div class="work-tabs reveal" role="tablist" aria-label="Tipo de trabajo">
-          <button class="work-tab" type="button" role="tab" id="wt-redes" aria-controls="wp-redes" aria-selected="true">Redes sociales <span class="work-tab__count"></span></button>
-          <button class="work-tab" type="button" role="tab" id="wt-web" aria-controls="wp-web" aria-selected="false" tabindex="-1">Sitios web <span class="work-tab__count"></span></button>
-        </div>
+              <div class="work-panel" role="tabpanel" id="wp-redes" aria-labelledby="wt-redes">
+                <p class="work-sub">Publicaciones, carruseles y piezas para redes de marcas reales y conceptos.</p>
+                <div class="filters" id="filters" role="group" aria-label="Filtrar por marca"></div>
+                <ul class="bento" id="tiles"></ul>
+              </div>
 
-        <div class="work-panel" role="tabpanel" id="wp-redes" aria-labelledby="wt-redes">
-          <div class="filters" id="filters" role="group" aria-label="Filtrar por marca"></div>
-          <ul class="tiles" id="tiles"></ul>
-        </div>
-
-        <div class="work-panel" role="tabpanel" id="wp-web" aria-labelledby="wt-web" hidden>
-          <ul class="projects" id="projects"></ul>
+              <div class="work-panel" role="tabpanel" id="wp-web" aria-labelledby="wt-web" hidden>
+                <ul class="projects" id="projects"></ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -190,5 +204,6 @@
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/title.js" defer></script>
   <script src="assets/js/wheel-menu.js" defer></script>
+  <script src="assets/js/scroll-stack.js" defer></script>
 </body>
 </html>

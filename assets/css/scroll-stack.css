@@ -1,0 +1,26 @@
+/* Hero + Sobre mí apilados: el hero se queda fijo, se encoge y se inclina
+   mientras Sobre mí sube encima y se endereza (valores desde scroll-stack.js). */
+.stack { position: relative; overflow-x: clip; } /* clip no rompe el sticky (overflow:hidden sí) */
+
+.stack > .hero {
+  position: sticky; top: 0;
+  transform-origin: 50% 40%;
+  will-change: transform;
+}
+
+.stack > .about {
+  position: relative; z-index: 2;
+  background: var(--white, #fff);
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -24px 60px rgba(5, 5, 7, .35);
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+
+/* Al terminar el efecto la tarjeta queda recta y sin esquinas redondeadas */
+.stack.is-settled > .about { border-radius: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stack > .hero { position: relative; }
+  .stack > .about { border-radius: 0; box-shadow: none; }
+}
